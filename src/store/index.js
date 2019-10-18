@@ -61,7 +61,6 @@ export default new Vuex.Store({
             ) {
                 state.currentMessages.push(message);
             } else if (message.to === state.currentUser) {
-                console.log(message);
                 const currentCount = state.unreadMessages?.[message.from] || 0;
                 state.unreadMessages = {
                     ...state.unreadMessages,
