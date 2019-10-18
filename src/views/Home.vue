@@ -1,18 +1,63 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+    <div class="wrapper">
+        <h1>The Super Chat App !</h1>
+        <h2>... done in an evening to learn Vue 😼</h2>
+        <LoginForm v-bind:onSubmit="login" />
+    </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import LoginForm from '@/components/LoginForm.vue';
+import websockets from '@/services/websocketsService';
+import constants from '../../shared/constants';
+import { LOGIN } from '@/store/mutations.types';
+
+const { on, emit, cleanup } = websockets();
 
 export default {
-  name: "home",
-  components: {
-    HelloWorld
-  }
+    name: 'home',
+
+    mounted() {
+        on(constants.SOCKET_EVENTS.LOGIN_SUCCESS, username => {
+            this.$store.dispatch(LOGIN, username);
+        });
+    },
+
+    destroyed() {
+        cleanup();
+    },
+
+    methods: {
+        login(username) {
+            emit(constants.SOCKET_EVENTS.LOGIN, username);
+        }
+    },
+
+    components: {
+        LoginForm
+    }
 };
 </script>
+
+<style scope lang="scss">
+.wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1,
+h2 {
+    color: var(--color-primary);
+}
+
+h1 {
+    margin-bottom: var(--spacing-sm);
+}
+
+h2 {
+    margin-bottom: var(--spacing-lg);
+}
+</style>

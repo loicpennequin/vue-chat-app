@@ -1,12 +1,14 @@
-import Vue from "vue";
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store';
+import { Plugin } from 'vue-fragment';
 
 Vue.config.productionTip = false;
+Vue.use(Plugin);
 
 new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount("#app");
+    router,
+    store,
+    render: h => h(App)
+}).$mount('#app');
