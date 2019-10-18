@@ -5,7 +5,7 @@
     "scripts": {
         "dev:server": "cross-env NODE_ENV=development nodemon server/app.js",
         "dev:client": "vue-cli-service serve",
-        "start": "node ser/app.js",
+        "start": "node server/app.js",
         "build": "vue-cli-service build",
         "lint": "vue-cli-service lint"
     },
