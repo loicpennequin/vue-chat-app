@@ -15,7 +15,6 @@ export default function websocketService() {
         isConnected,
 
         connect() {
-            console.log('connecting to server...');
             if (!socket?.connected) {
                 socket.open();
             }

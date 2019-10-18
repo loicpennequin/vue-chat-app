@@ -7,7 +7,6 @@
 <script>
 import { mapState } from 'vuex';
 import websockets from '@/services/websocketsService.js';
-import constants from '../shared/constants';
 const socket = websockets();
 
 export default {
@@ -31,9 +30,6 @@ export default {
         }
 
         socket.connect();
-        socket.on(constants.SOCKET_EVENTS.CONNECTION_SUCCESS, () => {
-            console.log('Websocket connection successful.');
-        });
     }
 };
 </script>
