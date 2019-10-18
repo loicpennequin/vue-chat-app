@@ -12,6 +12,10 @@ const PUBLIC_PATH = path.join(__dirname, '../dist');
 
 if (process.env.NODE_ENV === 'production') {
     app.use(enforce.HTTPS({ trustProtoHeader: true }));
+} else if (process.env.NODE_ENV === 'development') {
+    app.get('/', (req, res) => {
+        res.send('go to localhost:8080 :)');
+    });
 }
 app.use(compression());
 app.use(helmet());
@@ -20,7 +24,6 @@ app.use(express.static(PUBLIC_PATH));
 
 websockets(server);
 const PORT = process.env.PORT || 3000;
-
 server.listen(PORT, () => {
     console.log('server ready on port', PORT);
 });

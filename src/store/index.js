@@ -6,7 +6,8 @@ import {
     CHANGE_WINDOW,
     SET_MESSAGES,
     SET_USERS,
-    NEW_MESSAGE
+    NEW_MESSAGE,
+    MARK_AS_READ
 } from '@/store/mutations.types.js';
 
 Vue.use(Vuex);
@@ -17,6 +18,7 @@ export default new Vuex.Store({
         currentUser: '',
         currentWindow: 'public',
         currentMessages: [],
+        unreadMessages: {},
         connectedUsers: []
     },
 
@@ -53,9 +55,23 @@ export default new Vuex.Store({
         [NEW_MESSAGE](state, message) {
             if (message.public && state.currentWindow === 'public') {
                 state.currentMessages.push(message);
-            } else if (message.from === state.currentWindow) {
+            } else if (
+                message.from === state.currentWindow ||
+                message.to === state.currentWindow
+            ) {
                 state.currentMessages.push(message);
+            } else if (message.to === state.currentUser) {
+                console.log(message);
+                const currentCount = state.unreadMessages?.[message.from] || 0;
+                state.unreadMessages = {
+                    ...state.unreadMessages,
+                    [message.from]: currentCount + 1
+                };
             }
+        },
+
+        [MARK_AS_READ](state) {
+            state.unreadMessages[state.currentWindow] = 0;
         }
     },
 
@@ -82,8 +98,16 @@ export default new Vuex.Store({
 
         [NEW_MESSAGE]({ commit }, message) {
             commit(NEW_MESSAGE, message);
+        },
+
+        [MARK_AS_READ]({ commit }) {
+            commit(MARK_AS_READ);
         }
     },
 
-    modules: {}
+    getters: {
+        unreadMessagesByUser: state => user => {
+            return state.unreadMessages[user] || 0;
+        }
+    }
 });

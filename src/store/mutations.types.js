@@ -4,3 +4,4 @@ export const CHANGE_WINDOW = 'changeWindow';
 export const SET_MESSAGES = 'setMessages';
 export const SET_USERS = 'setUsers';
 export const NEW_MESSAGE = 'new message';
+export const MARK_AS_READ = 'markAsRead';

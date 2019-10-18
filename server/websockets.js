@@ -13,12 +13,10 @@ module.exports = server => {
         ~Object.values(connectedUsers).indexOf(username);
     const socketIdExists = socketId =>
         ~Object.keys(connectedUsers).indexOf(socketId);
-
     const findSocketIdByUsername = username => {
         const index = Object.values(connectedUsers).findIndex(
             u => u === username
         );
-
         return Object.keys(connectedUsers)[index];
     };
 

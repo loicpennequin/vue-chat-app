@@ -1,6 +1,6 @@
 <template>
     <form v-on:submit="sendMessage($event)" class="form">
-        <input type="text" id="name-input" v-model="message" placeholder="Say something !" />
+        <input id="name-input" v-model="message" type="text" placeholder="Say something !" />
         <button type="submit">Send</button>
     </form>
 </template>

@@ -9,13 +9,13 @@
                 class="message"
                 v-for="(message, index) in currentMessages"
                 v-bind:key="index"
-                v-bind:class="{ 
+                v-bind:class="{
                     system: message.from === 'System',
                     self: message.from === currentUser
                 }"
             >
-                <strong>{{message.from}} :</strong>
-                <span>{{message.message}}</span>
+                <strong>{{ message.from }} :</strong>
+                <span>{{ message.message }}</span>
             </li>
         </ul>
     </div>
@@ -23,10 +23,18 @@
 
 <script>
 import { mapState } from 'vuex';
+import { MARK_AS_READ } from '@/store/mutations.types';
+
 export default {
     name: 'MessagesList',
 
-    computed: mapState(['currentWindow', 'currentMessages', 'currentUser'])
+    computed: mapState(['currentWindow', 'currentMessages', 'currentUser']),
+
+    watch: {
+        currentMessages() {
+            this.$store.dispatch(MARK_AS_READ);
+        }
+    }
 };
 </script>
 

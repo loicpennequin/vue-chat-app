@@ -1,31 +1,34 @@
 <template>
     <ul class="wrapper">
-        <li>
-            <button
-                v-bind:class="{ active: currentWindow === 'public' }"
-                v-on:click="changeWindow('public')"
-            >Public</button>
-        </li>
-        <li v-for="user in connectedUsers" v-bind:key="user">
-            <button
-                v-bind:class="{ active: currentWindow === user }"
-                type="button"
-                v-on:click="changeWindow(user)"
-            >{{ user }}</button>
-        </li>
+        <UsersListItem
+            user="public"
+            v-bind:isActive="currentWindow === 'public'"
+        />
+        <UsersListItem
+            v-for="user in connectedUsers"
+            v-bind:user="user"
+            v-bind:isActive="currentWindow === user"
+            v-bind:key="user"
+        />
     </ul>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 import { CHANGE_WINDOW } from '@/store/mutations.types';
+import UsersListItem from '@/components/UsersListItem';
 
 export default {
     name: 'UsersList',
 
-    computed: mapState(['connectedUsers', 'currentWindow']),
+    computed: {
+        ...mapState(['connectedUsers', 'currentWindow']),
+        ...mapGetters(['unreadMessagesByUser'])
+    },
 
-    methods: mapActions([CHANGE_WINDOW])
+    methods: mapActions([CHANGE_WINDOW]),
+
+    components: { UsersListItem }
 };
 </script>
 

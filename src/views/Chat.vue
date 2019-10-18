@@ -109,5 +109,6 @@ export default {
 h1 {
     color: var(--color-primary);
     border-bottom: solid 1px var(--color-primary);
+    margin-bottom: 0;
 }
 </style>
