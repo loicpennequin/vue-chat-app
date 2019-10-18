@@ -18,6 +18,7 @@
         "dotenv": "^8.2.0",
         "enforce": "^0.1.7",
         "express": "^4.17.1",
+        "express-force-https": "^1.0.0",
         "express-sslify": "^1.2.0",
         "helmet": "^3.21.1",
         "nodemon": "^1.19.4",

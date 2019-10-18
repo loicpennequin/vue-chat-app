@@ -2,7 +2,7 @@ const express = require('express');
 const http = require('http');
 const compression = require('compression');
 const path = require('path');
-const enforce = require('enforce');
+const enforce = require('express-sslify');
 const helmet = require('helmet');
 const websockets = require('./websockets');
 
