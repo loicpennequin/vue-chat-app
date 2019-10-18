@@ -61,33 +61,26 @@ export default new Vuex.Store({
 
     actions: {
         [LOGIN]({ commit }, username) {
-            console.log('VUEX - ACTION--LOGIN');
             commit(LOGIN, username);
         },
 
         [LOGOUT]({ commit }) {
-            console.log('VUEX - ACTION--LOGOUT');
             commit(LOGOUT);
         },
 
         [CHANGE_WINDOW]({ commit }, windowId) {
-            console.log('VUEX - ACTION--CHANGE_WINDOW');
             commit(CHANGE_WINDOW, windowId);
         },
 
         [SET_MESSAGES]({ commit }, messages = []) {
-            console.log('VUEX - ACTION--SET_MESSAGES');
             commit(SET_MESSAGES, messages);
         },
 
         [SET_USERS]({ commit }, users) {
-            console.log('VUEX - ACTION--SET_USERS');
             commit(SET_USERS, users);
         },
 
         [NEW_MESSAGE]({ commit }, message) {
-            console.log(message);
-            console.log('VUEX - ACTION--NEW_MESSAGE');
             commit(NEW_MESSAGE, message);
         }
     },

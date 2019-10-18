@@ -1,7 +1,7 @@
 module.exports = {
     APP_URL:
         process.env.NODE_ENV === 'production'
-            ? 'https://daria-quick-chat-app.herokuapp.com'
+            ? 'https://quick-vue-chat-app.herokuapp.com/'
             : 'http://localhost:3000',
     ROLES: {
         SYSTEM: 'System'

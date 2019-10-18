@@ -2,19 +2,19 @@ const express = require('express');
 const http = require('http');
 const compression = require('compression');
 const path = require('path');
-// const enfore = require('enforce');
-// const helmet = reuire('helmet');
+const enforce = require('enforce');
+const helmet = require('helmet');
 const websockets = require('./websockets');
 
 const app = express();
 const server = http.createServer(app);
-const PUBLIC_PATH = path.join(__dirname, '../public');
+const PUBLIC_PATH = path.join(__dirname, '../dist');
 
 if (process.env.NODE_ENV === 'production') {
-    // app.use(enforce.HTTPS({ trustProtoHeader: true }));
+    app.use(enforce.HTTPS({ trustProtoHeader: true }));
 }
 app.use(compression());
-// app.use(helmet());
+app.use(helmet());
 
 app.use(express.static(PUBLIC_PATH));
 
