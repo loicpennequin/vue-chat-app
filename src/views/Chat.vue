@@ -1,6 +1,9 @@
 <template>
     <div class="layout">
-        <h1>Welcome back, {{ currentUser }} !</h1>
+        <header class="header">
+            <h1>Welcome back, {{ currentUser }} !</h1>
+            <button v-on:click="logout()">Sign Off</button>
+        </header>
         <MessagesList />
         <UsersList />
         <MessageForm v-bind:onSubmit="sendMessage" />
@@ -13,7 +16,12 @@ import MessagesList from '@/components/MessagesList.vue';
 import UsersList from '@/components/UsersList.vue';
 import websockets from '@/services/websocketsService';
 import constants from '../../shared/constants';
-import { SET_MESSAGES, SET_USERS, NEW_MESSAGE } from '@/store/mutations.types';
+import {
+    SET_MESSAGES,
+    SET_USERS,
+    NEW_MESSAGE,
+    LOGOUT
+} from '@/store/mutations.types';
 
 const { on, emit, cleanup } = websockets();
 
@@ -43,6 +51,10 @@ export default {
         on(constants.SOCKET_EVENTS.NEW_PRIVATE_MESSAGE, message => {
             this.$store.dispatch(NEW_MESSAGE, message);
         });
+
+        on(constants.SOCKET_EVENTS.LOGOUT_SUCCESS, () => {
+            this.$store.dispatch(LOGOUT);
+        });
     },
 
     destroyed() {
@@ -69,6 +81,10 @@ export default {
                     to: this.currentWindow
                 });
             }
+        },
+
+        logout() {
+            emit(constants.SOCKET_EVENTS.LOGOUT);
         }
     },
 
@@ -110,5 +126,12 @@ h1 {
     color: var(--color-primary);
     border-bottom: solid 1px var(--color-primary);
     margin-bottom: 0;
+}
+
+header {
+    display: flex;
+    button {
+        margin-left: auto;
+    }
 }
 </style>

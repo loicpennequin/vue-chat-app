@@ -14,6 +14,9 @@ module.exports = {
         LOGIN: 'add user',
         LOGIN_SUCCESS: 'login success',
 
+        LOGOUT: 'logout',
+        LOGOUT_SUCCESS: 'logout success',
+
         NEW_USER_LOGGED_IN: 'new user loggedin',
         USER_LOGGED_OUT: 'user logged out',
 

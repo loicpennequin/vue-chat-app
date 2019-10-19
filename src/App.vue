@@ -35,7 +35,7 @@ export default {
 </script>
 
 <style lang="scss">
-$primary: hsl(30, 60%, 60%);
+$primary: hsl(200, 60%, 60%);
 $secondary: hsl(330, 60%, 50%);
 $grey: #9999a2;
 
