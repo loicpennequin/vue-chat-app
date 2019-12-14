@@ -12,9 +12,6 @@ const PUBLIC_PATH = path.join(__dirname, '../dist');
 
 if (process.env.NODE_ENV === 'production') {
     app.use(enforce.HTTPS({ trustProtoHeader: true }));
-    app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, '../public/index.html'));
-    });
 } else if (process.env.NODE_ENV === 'development') {
     app.get('/', (req, res) => {
         res.send('go to localhost:8080 :)');
